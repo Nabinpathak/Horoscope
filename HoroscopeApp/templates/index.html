@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horoscope AI Agent</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; background-color: #f4f7f6; color: #333; }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 30px; }
+        form {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 0 auto 30px auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="date"],
+        input[type="time"],
+        input[type="text"],
+        select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .prediction, .astrological-info {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #a2d2ff;
+            background-color: #e0f2ff;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: 0 auto 20px auto;
+            text-align: left; /* Changed to left align for info display */
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+        .prediction h2, .astrological-info h2 {
+            color: #2c3e50;
+            margin-top: 0;
+            text-align: center; /* Keep headers centered */
+        }
+        .astrological-info p {
+            margin: 5px 0;
+        }
+        .astrological-info strong {
+            display: inline-block; /* Helps with alignment for key-value pairs */
+            width: 120px; /* Adjust as needed for alignment */
+            text-align: right;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Daily Horoscope</h1>
+
+    <form method="POST">
+        <label for="birth_date">Birth Date:</label>
+        <input type="date" id="birth_date" name="birth_date" required>
+
+        <label for="birth_time">Birth Time:</label>
+        <input type="time" id="birth_time" name="birth_time" required>
+
+        <label for="birth_city">Birth City:</label>
+        <input type="text" id="birth_city" name="birth_city" placeholder="e.g., Kathmandu" required>
+
+        <label for="birth_timezone">Birth Timezone (e.g., Asia/Kathmandu):</label>
+        <input type="text" id="birth_timezone" name="birth_timezone" placeholder="e.g., Asia/Kathmandu" required>
+
+        <label for="category">Choose Category:</label>
+        <select id="category" name="category" required>
+            <option value="">--Select Category--</option>
+            <option value="love">Love</option>
+            <option value="career">Career</option>
+            <option value="health">Health</option>
+            <option value="finance">Finance</option>
+            <option value="general">General</option>
+        </select>
+
+        <button type="submit">Get Horoscope</button>
+    </form>
+
+    {% if astrological_info %}
+        <div class="astrological-info">
+            <h2>Your Calculated Birth Chart:</h2>
+            <p><strong>Birth City:</strong> {{ astrological_info.birth_city | capitalize }}</p>
+            <p><strong>Birth Timezone:</strong> {{ astrological_info.birth_timezone }}</p>
+            <p><strong>Sun Sign:</strong> {{ astrological_info.sun_sign | capitalize }}</p>
+            <p><strong>Moon Sign:</strong> {{ astrological_info.moon_sign | capitalize }}</p>
+            <p><strong>Mercury Sign:</strong> {{ astrological_info.mercury_sign | capitalize }}</p>
+            <p><strong>Venus Sign:</strong> {{ astrological_info.venus_sign | capitalize }}</p>
+            <p><strong>Mars Sign:</strong> {{ astrological_info.mars_sign | capitalize }}</p>
+            <p><strong>Jupiter Sign:</strong> {{ astrological_info.jupiter_sign | capitalize }}</p>
+            <p><strong>Saturn Sign:</strong> {{ astrological_info.saturn_sign | capitalize }}</p>
+            </div>
+    {% endif %}
+
+    {% if prediction %}
+        <div class="prediction">
+            <h2>Your Prediction:</h2>
+            <p>{{ prediction }}</p>
+        </div>
+    {% endif %}
+</body>
+</html>
