@@ -47,8 +47,7 @@ Clone the Repository:
 
 Bash
 
-git clone https://github.com/[YourGitHubUsername]/[your-repo-name].git
-cd [your-repo-name]
+git clone https://github.com/Nabinpathak/Horoscope
 Install Dependencies:
 
 Frontend:
